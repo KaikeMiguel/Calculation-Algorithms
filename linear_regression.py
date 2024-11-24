@@ -61,13 +61,4 @@ tol = 5e-5
 print("Carregando...")
 g = gds(dataset_x, dataset_y, coef, lr, tol)
 
-print(f"\nA = ({dataset_x[0]} , {dataset_y[0]})")
-print(f"B = ({dataset_x[1]} , {dataset_y[1]})")
-print(f"C = ({dataset_x[2]} , {dataset_y[2]})")
-print(f"D = ({dataset_x[3]} , {dataset_y[3]})")
-print(f"E = ({dataset_x[4]} , {dataset_y[4]})")
-print(f"F = ({dataset_x[5]} , {dataset_y[5]})")
-print(f"G = ({dataset_x[6]} , {dataset_y[6]})")
-print(f"H = ({dataset_x[7]} , {dataset_y[7]})")
-
 print(f"\nf(x) = {round(g[1][0],2)}x^7 + {round(g[1][1],2)}x^6 + {round(g[1][2],2)}x^5 + {round(g[1][3],2)}x^4 + {round(g[1][4],2)}x^3 + {round(g[1][5],2)}x^2 + {round(g[1][6],2)}x + {round(g[1][7],2)}")
