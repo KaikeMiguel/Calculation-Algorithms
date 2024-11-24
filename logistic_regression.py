@@ -2,7 +2,8 @@ import math
 import csv
 import matplotlib.pyplot as plt
 
-path = "./src/heart_failure.csv"
+# https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data
+path = "./heart_failure.csv"
 
 dataset_x = []
 dataset_y = []
@@ -190,25 +191,18 @@ print(f"Acurácia final: {acuracia_final:.3%}")
 print(f"F1-Score final: {f1score_final:.2f}")
 
 
+# Parte de plotar o gráfico
 x_plot = [normalized_x[i] for i in sorted(range(len(normalized_x)), key=lambda i: normalized_x[i])]
 y_plot = [1 if sigmoid(a_final * xi + b_final) >= 0.5 else 0 for xi in x_plot]
 
 plt.figure(figsize=(14, 6))
 
-plt.subplot(1, 2, 1)
 plt.scatter(normalized_x, dataset_y, alpha=0.6, label='Dados reais', color='blue')
 plt.plot(x_plot, y_plot, color='red', label='Curva Sigmoide Ajustada (classificação binária)')
 plt.title("Regressão Logística - Idade Normalizada vs. Morte")
 plt.xlabel("Idade Normalizada")
 plt.ylabel("Classificação de Morte (0 ou 1)")
 plt.legend()
-plt.grid(True)
-
-plt.subplot(1, 2, 2)
-plt.plot(cost_copy, color='green')
-plt.title("Histórico da Função de Custo (Log-loss)")
-plt.xlabel("Iterações")
-plt.ylabel("Custo")
 plt.grid(True)
 
 plt.tight_layout()
