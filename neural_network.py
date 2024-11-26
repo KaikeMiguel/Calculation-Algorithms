@@ -116,34 +116,34 @@ def derivadas(dataset_x, dataset_y, a, b, c, d, k, l):
     return df_a, df_b, df_c, df_d, df_k, df_l
 
 
-def distancia(a_depois, b_depois, c_depois, d_depois, k_depois, l_depois, a_antes, b_antes, c_antes, d_antes, k_antes, l_antes):
-    return ((a_depois - a_antes)**2 + (b_depois - b_antes)**2 + (c_depois - c_antes)**2 + (d_depois - d_antes)**2 + (k_depois - k_antes)**2 + (l_depois - l_antes)**2) ** 0.5
+def distancia(a1, b1, c1, d1, k1, l1, a0, b0, c0, d0, k0, l0):
+    return ((a1 - a0)**2 + (b1 - b0)**2 + (c1 - c0)**2 + (d1 - d0)**2 + (k1 - k0)**2 + (l1 - l0)**2) ** 0.5
 
 
 def grad_des(a, b, c, d, k, l, tolerancia, learning_rate):
-    a_antes = a
-    b_antes = b
-    c_antes = c
-    d_antes = d
-    k_antes = k
-    l_antes = l
+    a0 = a
+    b0 = b
+    c0 = c
+    d0 = d
+    k0 = k
+    l0 = l
 
-    a_depois, b_depois, c_depois, d_depois, k_depois, l_depois = [0.1] * 6
+    a1, b1, c1, d1, k1, l1 = [0.1] * 6
 
     i = 0
     loading_state = 0
 
     while True:
-        df = derivadas(dataset_x, dataset_y, a_antes, b_antes, c_antes, d_antes, k_antes, l_antes)
+        df = derivadas(dataset_x, dataset_y, a0, b0, c0, d0, k0, l0)
 
-        a_depois = a_antes - learning_rate * df[0]
-        b_depois = d_antes - learning_rate * df[1]
-        c_depois = c_antes - learning_rate * df[2]
-        d_depois = d_antes - learning_rate * df[3]
-        k_depois = k_antes - learning_rate * df[4]
-        l_depois = l_antes - learning_rate * df[5]
+        a1 = a0 - learning_rate * df[0]
+        b1 = d0 - learning_rate * df[1]
+        c1 = c0 - learning_rate * df[2]
+        d1 = d0 - learning_rate * df[3]
+        k1 = k0 - learning_rate * df[4]
+        l1 = l0 - learning_rate * df[5]
 
-        dist = distancia(a_depois, b_depois, c_depois, d_depois, k_depois, l_depois, a_antes, b_antes, c_antes, d_antes, k_antes, l_antes)
+        dist = distancia(a1, b1, c1, d1, k1, l1, a0, b0, c0, d0, k0, l0)
 
         i += 1
 
@@ -161,17 +161,17 @@ def grad_des(a, b, c, d, k, l, tolerancia, learning_rate):
 
         
         if dist > tolerancia:
-            a_antes = a_depois
-            b_antes = b_depois
-            c_antes = c_depois
-            d_antes = d_depois
-            k_antes = k_depois
-            l_antes = l_depois
+            a0 = a1
+            b0 = b1
+            c0 = c1
+            d0 = d1
+            k0 = k1
+            l0 = l1
         
         else:
             break
 
-    return i, a_antes, b_antes, c_antes, d_antes, k_antes, l_antes
+    return i, a0, b0, c0, d0, k0, l0
 
 
 
